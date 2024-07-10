@@ -11,9 +11,10 @@ services:
       - TESTING=0
       - DATABASE_URL=postgresql://postgres:postgres@database:5432/shopping
       - DATABASE_TEST_URL=postgresql://postgres:postgres@database:5432/shopping_test
+      - ENABLE_METRICS=true
     depends_on:
     - database
-  
+
   database:
     build:
       context: src/database

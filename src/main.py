@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 import logging
-from prometheus_fastapi_instrumentator import Instrumentator
+from prometheus_fastapi_instrumentator import Instrumentator, metrics
 
 from src.database.database import create_database_and_tables
 from src.routers import carts, items, healthcheck
@@ -26,4 +26,16 @@ def get_app() -> FastAPI:
 
 app = get_app()
 
-Instrumentator().instrument(app).expose(app)
+# Instrumentator().instrument(app).expose(app)
+instrumentator = Instrumentator(
+    should_group_status_codes=False,
+    should_ignore_untemplated=True,
+    should_respect_env_var=True,
+    should_instrument_requests_inprogress=True,
+    excluded_handlers=[".*admin.*", "/metrics"],
+    env_var_name="ENABLE_METRICS",
+    inprogress_name="inprogress",
+    inprogress_labels=True,
+)
+
+instrumentator.instrument(app).expose(app)
