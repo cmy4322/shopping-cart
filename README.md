@@ -11,6 +11,11 @@ This will start the two services. Go to the following url to access the docs and
 http://localhost:8004
 ```
 
+I used pytest so the tests can be run by running the following command from the root directory:
+```
+pytest
+```
+
 
 Didn't have time to properly write the last two test cases. Implemented the update_cart endpoint but did not properly have it handle removing quantity of a specific item. It currently adds to the existing quantity only.
 
