@@ -7,8 +7,6 @@ logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 class Settings(BaseSettings):
-    environment: str = "dev"
-    testing: bool = bool(0)
     database_url: AnyUrl = None
 
 @lru_cache()

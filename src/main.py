@@ -26,6 +26,10 @@ def get_app() -> FastAPI:
 
 app = get_app()
 
+@app.get("/")
+async def read_main():
+    return {"msg": "Hello World"}
+
 # Instrumentator().instrument(app).expose(app)
 instrumentator = Instrumentator(
     should_group_status_codes=False,
